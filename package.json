@@ -1,0 +1,20 @@
+{
+    "name": "browserify",
+    "version": "1.0.0",
+    "description": "this is my first project in browserify",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "watchify -v app/*.js -x jquery -o ./public.js",
+        "prebuild_vendor": "rm -f ./public.js; rm -f ./vendor.js",
+        "build_vendor": "browserify -r jquery -o ./vendor.js",
+        "postbuild_vendor": "npm run build"
+    },
+    "author": "Hareesh Puliyedath Udumbath",
+    "license": "MIT",
+    "devDependencies": {
+        "browserify-css": "^0.11.1",
+        "jquery": "^3.2.1",
+        "uniq": "^1.0.1"
+    }
+}
