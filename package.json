@@ -1,22 +1,27 @@
 {
-  "name": "browserify",
-  "version": "1.0.0",
-  "description": "this is my first project in browserify",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "watchify app/{*.js,styles/*.css} -p [css-modulesify -o public.css] -x jquery -o ./public.js --debug --verbose",
-    "prebuild_vendor": "rm -f ./public.js; rm -f ./vendor.js ; rm -f ./public.css",
-    "build_vendor": "browserify -r jquery -o ./vendor.js",
-    "postbuild_vendor": "node_modules/superstatic/bin/server & npm run build"
-  },
-  "author": "Hareesh Puliyedath Udumbath",
-  "license": "MIT",
-  "devDependencies": {
-    "browserify-css": "^0.11.1",
-    "css-modulesify": "^0.28.0",
-    "jquery": "^3.2.1",
-    "superstatic": "^4.3.0",
-    "uniq": "^1.0.1"
-  }
+    "name": "browserify",
+    "version": "1.0.0",
+    "description": "this is my first project in browserify",
+    "main": "main.js",
+    "config": {
+        "xModules": "-x jquery -x lodash",
+        "rModules": "-r jquery -r lodash",
+        "cssMPlugin": "[css-modulesify -o ./public/public.css]"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "watchify app/entry.js $npm_package_config_xModules -p $npm_package_config_cssMPlugin -o ./public/public.js --debug --verbose",
+        "prebuild_vendor": "rm -f ./public/public.js; rm -f ./public/vendor.js ; rm -f ./public/public.css",
+        "build_vendor": "browserify $npm_package_config_rModules -o ./public/vendor.js",
+        "postbuild_vendor": "superstatic public --port 8080 --host 127.0.0.1  & npm run build"
+    },
+    "author": "Hareesh Puliyedath Udumbath",
+    "license": "MIT",
+    "devDependencies": {
+        "browserify-css": "^0.11.1",
+        "css-modulesify": "^0.28.0",
+        "jquery": "^3.2.1",
+        "lodash": "^4.17.4",
+        "uniq": "^1.0.1"
+    }
 }
