@@ -1,0 +1,7 @@
+.label_button_label{
+    display: block;
+    background: #ffe;
+    color : black;
+    font-size: 1rem;
+    border:1px solid red;
+}
